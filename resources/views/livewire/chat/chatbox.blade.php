@@ -1,14 +1,15 @@
 <div>
+    @if($selectedConversation)
     <div class="chatbox_header">
         <div class="return">
             <i class="bi bi-arrow-left"></i>
         </div>
 
         <div class="img_container">
-            <img src="https://picsum.photos/id/231/200/300" alt="">
+            <img src="https://picsum.photos/id/{{ $receiverInstance->id }}/200/300" alt="">
         </div>
 
-        <div class="name">Ali</div>
+        <div class="name">{{ $receiverInstance->name }}</div>
 
         <div class="info">
             <div class="info_item">
@@ -23,23 +24,20 @@
         </div>
     </div>
     <div class="chatbox_body">
-        <div class="msg_body msg_body_receiver">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae doloribus earum, excepturi id, modi
-            necessitatibus nemo obcaecati odio porro quam quia sed similique sit, tempore unde veritatis vitae. Dolorum,
-            sed! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad adipisci aliquam animi asperiores
-            aspernatur assumenda delectus doloremque ex illo itaque laudantium maxime minima minus odit quibusdam,
-            reprehenderit similique tempora totam! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, at,
-            atque aut autem distinctio eos excepturi id inventore itaque, iusto laborum nobis nulla officiis ratione
-            recusandae soluta velit. Ipsa, iure.
+            @foreach($messages as $message)
+                <div class="msg_body msg_body_receiver">
+                    {{ $message->body }}
             <div class="msg_body_footer">
                 <div class="date">
-                    5 hours ago
+                    {{ $receiverInstance->created_at->format("m: i a") }}
                 </div>
                 <div class="read">
                     <i class="bi bi-check"></i>
                 </div>
             </div>
         </div>
+
+            @endforeach
         @foreach(range(1,3) as $data)
             <div class="msg_body msg_body_me">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae doloribus earum, excepturi id, modi
@@ -61,4 +59,9 @@
         @endforeach
 
     </div>
+    @else
+        <div class="fs-4 text-conversation text-primary mt-5">
+            No Conversation Selected
+        </div>
+    @endif
 </div>
