@@ -23,12 +23,42 @@
         </div>
     </div>
     <div class="chatbox_body">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda nobis optio porro quibusdam reiciendis
-        saepe, sunt suscipit veniam! Amet aperiam aspernatur dolore illum labore officiis porro possimus praesentium sit
-        tempora!
+        <div class="msg_body msg_body_receiver">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae doloribus earum, excepturi id, modi
+            necessitatibus nemo obcaecati odio porro quam quia sed similique sit, tempore unde veritatis vitae. Dolorum,
+            sed! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad adipisci aliquam animi asperiores
+            aspernatur assumenda delectus doloremque ex illo itaque laudantium maxime minima minus odit quibusdam,
+            reprehenderit similique tempora totam! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, at,
+            atque aut autem distinctio eos excepturi id inventore itaque, iusto laborum nobis nulla officiis ratione
+            recusandae soluta velit. Ipsa, iure.
+            <div class="msg_body_footer">
+                <div class="date">
+                    5 hours ago
+                </div>
+                <div class="read">
+                    <i class="bi bi-check"></i>
+                </div>
+            </div>
+        </div>
+        @foreach(range(1,3) as $data)
+            <div class="msg_body msg_body_me">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae doloribus earum, excepturi id, modi
+                necessitatibus nemo obcaecati odio porro quam quia sed similique sit, tempore unde veritatis vitae.
+                Dolorum, sed! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad adipisci aliquam animi
+                asperiores aspernatur assumenda delectus doloremque ex illo itaque laudantium maxime minima minus odit
+                quibusdam, reprehenderit similique tempora totam! Lorem ipsum dolor sit amet, consectetur adipisicing
+                elit. Ad, at, atque aut autem distinctio eos excepturi id inventore itaque, iusto laborum nobis nulla
+                officiis ratione recusandae soluta velit. Ipsa, iure.
+                <div class="msg_body_footer">
+                    <div class="date">
+                        5 hours ago
+                    </div>
+                    <div class="read">
+                        <i class="bi bi-check"></i>
+                    </div>
+                </div>
+            </div>
+        @endforeach
 
-    </div>
-    <div class="chatbox_footer">
-        footer
     </div>
 </div>
