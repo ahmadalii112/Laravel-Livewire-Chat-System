@@ -10,6 +10,7 @@ class ChatList extends Component
 {
     public $authId, $conversations, $receiverInstance, $selectedConversation;
     protected $listeners = ['chatUserSelected'];
+
     public function mount()
     {
         $this->authId = auth()->id();
@@ -40,5 +41,6 @@ class ChatList extends Component
         $this->selectedConversation = $conversation;
         $receiverInstance = User::find($receiverId);
         $this->emitTo('chat.chatbox', 'loadConversation', $this->selectedConversation, $receiverInstance);
+        $this->emitTo('chat.send-message', 'updateSendMessage', $this->selectedConversation, $receiverInstance);
     }
 }

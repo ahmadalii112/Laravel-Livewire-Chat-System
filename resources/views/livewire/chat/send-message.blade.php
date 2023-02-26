@@ -1,9 +1,9 @@
 <div>
-    <form action="">
+    <form wire:submit.prevent="sendMessage" action="">
         <div class="chatbox_footer">
             <div class="custom_form_group">
 
-                <input type="text" class="control" placeholder="Write Message...">
+                <input wire:model="body" type="text" class="control" placeholder="Write Message...">
                 <button type="submit" class="submit">Send</button>
             </div>
         </div>
