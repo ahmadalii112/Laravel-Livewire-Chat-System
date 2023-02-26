@@ -9,7 +9,7 @@ use Livewire\Component;
 class ChatList extends Component
 {
     public $authId, $conversations, $receiverInstance, $selectedConversation;
-    protected $listeners = ['chatUserSelected'];
+    protected $listeners = ['chatUserSelected', 'refresh' => '$refresh'];
 
     public function mount()
     {

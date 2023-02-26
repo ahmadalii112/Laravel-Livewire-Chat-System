@@ -9,7 +9,7 @@ use Livewire\Component;
 
 class Chatbox extends Component
 {
-    protected $listeners = ['loadConversation'];
+    protected $listeners = ['loadConversation', 'pushMessage'];
     public $selectedConversation, $receiverInstance;
     public $messageCount, $messages;
     public $paginate = 10;
@@ -23,6 +23,12 @@ class Chatbox extends Component
             ->skip($this->messageCount - $this->paginate)
             ->take($this->paginate)->get();
         $this->dispatchBrowserEvent('chatSelected');
+    }
+
+    public function pushMessage($messageId)
+    {
+        $newMessage = Message::find($messageId);
+        $this->messages->push($newMessage);
     }
 
     public function render()

@@ -19,6 +19,8 @@
                 $('.chat_list_container').hide();
                 $('.chat_box_container').show();
             }
+            // scroll to the bottom of the chatbox body
+            $(".chatbox_body").scrollTop($(".chatbox_body")[0].scrollHeight);
         });
         $(window).resize(function (){
             if (window.innerWidth > 768) {
