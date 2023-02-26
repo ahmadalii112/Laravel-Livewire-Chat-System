@@ -9,9 +9,10 @@ use Livewire\Component;
 
 class Chatbox extends Component
 {
-    protected $listeners = ['loadConversation', 'pushMessage'];
+    protected $listeners = ['loadConversation', 'pushMessage', 'loadMore'];
     public $selectedConversation, $receiverInstance;
     public $messageCount, $messages;
+    public $height;
     public $paginate = 10;
 
     public function loadConversation(Conversation $conversation, User $receiver)
@@ -29,6 +30,16 @@ class Chatbox extends Component
     {
         $newMessage = Message::find($messageId);
         $this->messages->push($newMessage);
+        $this->dispatchBrowserEvent('rowChatToBottom');
+    }
+
+    public function loadMore()
+    {
+        $this->paginate += 10;
+        $this->messageCount = Message::where('conversation_id', $this->selectedConversation->id)->count();
+        $this->messages = Message::where('conversation_id', $this->selectedConversation->id)
+            ->skip($this->messageCount - $this->paginate)
+            ->take($this->paginate)->get();
     }
 
     public function render()

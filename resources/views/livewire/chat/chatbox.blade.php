@@ -38,11 +38,23 @@
                 </div>
 
             @endforeach
-
         </div>
+        <script>
+            $(".chatbox_body").scroll(function (){
+                var top = $(".chatbox_body").scrollTop();
+                if (top === 0){
+                    window.livewire.emit("loadMore")
+                }
+            })
+        </script>
     @else
         <div class="fs-4 text-conversation text-primary mt-5">
             No Conversation Selected
         </div>
     @endif
+        <script>
+            window.addEventListener("rowChatToBottom", function () {
+                $(".chatbox_body").scrollTop($('.chatbox_body')[0].scrollHeight);
+            });
+        </script>
 </div>
