@@ -10,7 +10,7 @@
 
     <div class="chatlist_body">
         @forelse($conversations as $conversation)
-            <div class="chatlist_item">
+            <div class="chatlist_item" wire:click="$emit('chatUserSelected', {{$conversation}},{{$this->getChatUserInstance($conversation, 'id')}})">
                 <div class="chatlist_img_container">
                     <img src="https://picsum.photos/id/{{ $this->getChatUserInstance($conversation, 'id') }}/200/300" alt="">
                 </div>

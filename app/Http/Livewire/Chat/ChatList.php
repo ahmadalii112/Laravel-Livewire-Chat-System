@@ -8,8 +8,8 @@ use Livewire\Component;
 
 class ChatList extends Component
 {
-    public $authId, $conversations, $receiverInstance;
-
+    public $authId, $conversations, $receiverInstance, $selectedConversation;
+    protected $listeners = ['chatUserSelected'];
     public function mount()
     {
         $this->authId = auth()->id();
@@ -33,5 +33,11 @@ class ChatList extends Component
         if (isset($request)) {
             return $this->receiverInstance->$request;
         }
+    }
+
+    public function chatUserSelected(Conversation $conversation, $receiverId)
+    {
+        $this->selectedConversation = $conversation;
+        $receiverInstance = User::find($receiverId);
     }
 }
