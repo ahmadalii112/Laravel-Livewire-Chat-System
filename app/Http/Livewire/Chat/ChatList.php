@@ -2,12 +2,36 @@
 
 namespace App\Http\Livewire\Chat;
 
+use App\Models\Conversation;
+use App\Models\User;
 use Livewire\Component;
 
 class ChatList extends Component
 {
+    public $authId, $conversations, $receiverInstance;
+
+    public function mount()
+    {
+        $this->authId = auth()->id();
+        $this->conversations = Conversation::where('sender_id', $this->authId)
+            ->orWhere('receiver_id', $this->authId)
+            ->latest('last_time_message')->get();
+    }
+
     public function render()
     {
         return view('livewire.chat.chat-list');
+    }
+
+    public function getChatUserInstance(Conversation $conversation, $request)
+    {
+        $this->authId = auth()->id();
+        # get selected conversation
+        $this->receiverInstance = ($conversation->sender_id == $this->authId)
+            ? User::firstWhere('id', $conversation->receiver_id)
+            : User::firstWhere('id', $conversation->sender_id);
+        if (isset($request)) {
+            return $this->receiverInstance->$request;
+        }
     }
 }

@@ -18,13 +18,13 @@ class CreateChat extends Component
             ->orWhere(['receiver_id' => $receiverId, 'sender_id' => auth()->id()])
             ->get();
         # if conversation does not exist then create a conversation
-        if ($checkedConversation->isEmpty()) {
-            $conversation = Conversation::create(['receiver_id' => $receiverId, 'sender_id' => auth()->id(), 'last_time_message' => now()]);
+        if ($checkedConversation->count() >= 0 ) {
+            $conversation = Conversation::updateOrCreate(['receiver_id' => $receiverId, 'sender_id' => auth()->id()],['receiver_id' => $receiverId, 'sender_id' => auth()->id(), 'last_time_message' => now()]);
             # create a message using relationship
             $conversation->messages()->create(['receiver_id' => $receiverId, 'sender_id' => auth()->id(), 'body' => $this->message]);
-            dd($conversation->load('messages')->toArray());
+            dd('saved');
         } else {
-
+            dd("else");
         }
     }
 
